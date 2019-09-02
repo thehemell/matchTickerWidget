@@ -1,0 +1,150 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 4px;
+}
+
+button {
+    height: 30px;
+    width: 30px;
+    outline: none;
+}
+
+.block {
+    background-color: #ffeee4;
+    border-radius: 4px;
+    padding: 4px;
+    width: 320px;
+}
+
+.block__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.block__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.block__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github {
+    color: black;
+    text-decoration: none;
+}
+
+.github:hover {
+    color: #ff6f23;
+}
+
+.block__btn {
+    border-radius: 4px;
+    border: 1px solid #ff6f23;
+    padding: 3px 12px;
+    font-size: 12px;
+    color: #ff6f23;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color .3s ease, color .3s ease;
+    text-decoration: none;
+}
+
+.block__btn:hover {
+    color: #fff;
+    background-color: #ff6f23;
+}
+
+.b-match {
+    background-color: white;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px 7px 12px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    min-height: 63px;
+    margin-bottom: 4px;
+}
+
+.b-match:hover {
+    text-decoration: none;
+}
+
+.b-match__header {
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    padding: 6px 0;
+}
+
+.b-match__info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.b-match-team {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.b-match-team__name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    margin-left: 8px;
+}
+
+.b-match-team__logo {
+    width: 24px;
+    height: 24px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.b-collapse {
+
+}
+
+.b-collapse__title {
+    background-color: rgba(255,255,255,.5);
+    border-radius: 4px;
+    cursor: pointer;
+    height: 46px;
+    margin-bottom: 4px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.b-collapse__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-collapse__content_hide {
+    display: none;
+}

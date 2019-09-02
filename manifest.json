@@ -1,0 +1,14 @@
+{
+  "name": "Матчтикер",
+  "version": "1.0",
+  "description": "Расписание киберспортивных матчей по DotA2, CS:GO, PUBG, LoL, WarCraft III, StarCraft 2 и многое другое, на основе сайта CyberSport.ru",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "background": {
+    "scripts": ["main.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "main.html"
+  },
+  "manifest_version": 2
+}
