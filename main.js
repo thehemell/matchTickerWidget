@@ -8,15 +8,14 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 /*
-fetch(``, {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-}).then(response => {
-    console.log(response.body);
-}).catch(
-    err => error(err)
-);*/
+
+const xhr = new XMLHttpRequest();
+
+xhr.open("GET", "http://localhost/~danilrayanov/", true);
+
+xhr.onload = function(){
+    const matches = xhr.responseText;
+};
+
+xhr.send();
+*/
