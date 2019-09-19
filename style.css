@@ -160,6 +160,7 @@ button {
 }
 
 .b-match:hover {
+    box-shadow: 0 12px 20px rgba(2, 0, 99, 0.24);
     text-decoration: none;
 }
 
@@ -224,6 +225,19 @@ button {
     align-items: center;
     font-weight: 600;
     letter-spacing: 1px;
+}
+
+
+.b-collapse__title-text {
+
+}
+
+.b-collapse__title-arrow {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.292893 0.292893C0.683417 -0.097631 1.31658 -0.097631 1.70711 0.292893L6 4.58579L10.2929 0.292893C10.6834 -0.0976314 11.3166 -0.0976315 11.7071 0.292893C12.0976 0.683417 12.0976 1.31658 11.7071 1.70711L6.70711 6.70711C6.31658 7.09763 5.68342 7.09763 5.29289 6.70711L0.292893 1.70711C-0.0976313 1.31658 -0.0976314 0.683417 0.292893 0.292893Z' fill='%23FF6F23'/%3E%3C/svg%3E%0A");
+    background-size: cover;
+    width: 12px;
+    height: 7px;
+    margin-left: 8px;
 }
 
 .b-collapse__content {

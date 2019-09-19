@@ -6,16 +6,3 @@ chrome.runtime.onInstalled.addListener(function() {
         }]);
     });
 });
-
-/*
-
-const xhr = new XMLHttpRequest();
-
-xhr.open("GET", "http://localhost/~danilrayanov/", true);
-
-xhr.onload = function(){
-    const matches = xhr.responseText;
-};
-
-xhr.send();
-*/

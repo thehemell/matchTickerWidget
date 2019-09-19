@@ -1,36 +1,62 @@
 'use strict';
 
-/*
-fetch(`http://localhost/~danilrayanov/`, {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-}).then(response => {
-    console.log(response.body);
-}).catch(
-    err => error(err)
-);
+let timeLimit = (1800 / 2) * 1000,
+    localStorageInitTime = localStorage.getItem('initTime');
 
-function error(msg) {
-    console.log(msg);
-}*/
+const date = +new Date();
 
-const xhr = new XMLHttpRequest();
+if (localStorageInitTime === null) {
+    localStorage.setItem('initTime', date);
 
-xhr.open("GET", "http://api.skybound.ru/", true);
+    init('query');
 
-xhr.onload = function(){
-    const matches = JSON.parse(xhr.responseText);
+    console.log('Первый запрос')
+} else if (date - localStorageInitTime > timeLimit) {
+    localStorage.clear();
 
-    const elMatchesList = document.getElementById('matchesList');
+    localStorage.setItem('initTime', date);
+
+    init('query');
+} else {
+    init('load');
+}
+
+function init(type) {
+    if (type === 'query') {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://api.skybound.ru/', true);
+
+        xhr.onload = function(){
+            let matches = xhr.responseText,
+                matchesParse = JSON.parse(xhr.responseText);
+
+            localStorage.setItem('matchesList', matches);
+
+            create(matchesParse)
+        };
+
+        xhr.send();
+
+    } else {
+        let matches = localStorage.getItem('matchesList'),
+            matchesParse = JSON.parse(matches);
+
+        document.addEventListener("DOMContentLoaded",() => {
+            create(matchesParse)
+        });
+    }
+}
+
+function create(matches) {
+
+    const siteUrl = 'https://cybersport.ru',
+          elMatchesList = document.getElementById('matchesList');
 
     function createMatch(item, elMatch) {
         elMatch.classList.add('b-match');
         elMatch.setAttribute('id', item.id);
-        elMatch.setAttribute('href', 'https://cybersport.ru/' + item.uri);
+        elMatch.setAttribute('href', siteUrl + item.uri);
         elMatch.setAttribute('target', '_blank');
 
         let elMatchHeader = document.createElement('div');
@@ -56,12 +82,6 @@ xhr.onload = function(){
         elMatchHeaderRight.appendChild(elMatchReportage);
 
         let elMatchHeaderDate = document.createElement('div');
-
-        /* let date = new Date();
-
-        date.setTime(item.timestamp);
-
-        console.log( date.getUTCFullYear() );*/
 
         let d = new Date(0);
 
@@ -107,7 +127,7 @@ xhr.onload = function(){
         elMatchTeamLogo.setAttribute('alt', team.title);
 
         if (team.title === 'TBD') {
-            elMatchTeamLogo.setAttribute('src', 'http://cybersport.ru.local/assets/img/no-photo/no-photo-main.png');
+            elMatchTeamLogo.setAttribute('src', siteUrl + '/assets/img/no-photo/no-photo-main.png');
         } else {
             elMatchTeamLogo.setAttribute('src', team.image);
         }
@@ -136,8 +156,18 @@ xhr.onload = function(){
         let elCollapseTitle = document.createElement('div');
 
         elCollapseTitle.classList.add('b-collapse__title');
-        elCollapseTitle.append(title);
         elCollapse.appendChild(elCollapseTitle);
+
+        let elCollapseTitleText = document.createElement('div');
+
+        elCollapseTitleText.classList.add('b-collapse__title-text');
+        elCollapseTitleText.append(title);
+        elCollapseTitle.appendChild(elCollapseTitleText);
+
+        let elCollapseTitleArrow = document.createElement('div');
+
+        elCollapseTitleArrow.classList.add('b-collapse__title-arrow');
+        elCollapseTitle.appendChild(elCollapseTitleArrow);
 
         let elCollapseContent = document.createElement('div');
 
@@ -163,7 +193,6 @@ xhr.onload = function(){
         }
     });
 
-
     let elCollapseTitle = document.querySelectorAll('.b-collapse__title');
 
     elCollapseTitle.forEach(function (item) {
@@ -173,6 +202,4 @@ xhr.onload = function(){
             itemContent.classList.toggle('b-collapse__content_hide');
         });
     });
-};
-
-xhr.send();
+}
