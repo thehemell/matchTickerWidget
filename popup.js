@@ -9,8 +9,6 @@ if (localStorageInitTime === null) {
     localStorage.setItem('initTime', date);
 
     init('query');
-
-    console.log('Первый запрос')
 } else if (date - localStorageInitTime > timeLimit) {
     localStorage.clear();
 
@@ -23,33 +21,31 @@ if (localStorageInitTime === null) {
 
 function init(type) {
     if (type === 'query') {
-        const xhr = new XMLHttpRequest();
+        fetch('http://api.skybound.ru/').then(response => new Promise((resolve, reject) => {
+            if (!response.ok) {
+                reject(response.status);
+            }
 
-        xhr.open('GET', 'http://api.skybound.ru/', true);
+            resolve(response.json())
+        })).then(data => {
+            localStorage.setItem('matchesList', JSON.stringify(data));
 
-        xhr.onload = function(){
-            let matches = xhr.responseText,
-                matchesParse = JSON.parse(xhr.responseText);
+            return create(data);
+        }).catch(err => {
+            alert('Статус ошибки: ' + err);
 
-            localStorage.setItem('matchesList', matches);
-
-            create(matchesParse)
-        };
-
-        xhr.send();
-
+            return false;
+        });
     } else {
-        let matches = localStorage.getItem('matchesList'),
-            matchesParse = JSON.parse(matches);
+        let matches = JSON.parse(localStorage.getItem('matchesList'));
 
         document.addEventListener("DOMContentLoaded",() => {
-            create(matchesParse)
+            create(matches);
         });
     }
 }
 
 function create(matches) {
-
     const siteUrl = 'https://cybersport.ru',
           elMatchesList = document.getElementById('matchesList');
 
