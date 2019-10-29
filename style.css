@@ -157,10 +157,12 @@ button {
     position: relative;
     min-height: 63px;
     margin-bottom: 4px;
+    z-index: 1;
 }
 
 .b-match:hover {
     box-shadow: 0 12px 20px rgba(2, 0, 99, 0.24);
+    z-index: 2;
     text-decoration: none;
 }
 
