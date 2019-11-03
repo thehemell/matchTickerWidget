@@ -58,24 +58,24 @@ function create(matches) {
         let elMatchHeader = document.createElement('div');
 
         elMatchHeader.classList.add('b-match__header');
-        elMatch.appendChild(elMatchHeader);
+        elMatch.append(elMatchHeader);
 
         let elMatchHeaderRight = document.createElement('div');
 
         elMatchHeaderRight.classList.add('b-match__header-right');
-        elMatchHeader.appendChild(elMatchHeaderRight);
+        elMatchHeader.append(elMatchHeaderRight);
 
         let elMatchDiscipline = document.createElement('div');
 
         elMatchDiscipline.classList.add('icon');
         elMatchDiscipline.classList.add('icon__' + item.discipline.slug);
-        elMatchHeaderRight.appendChild(elMatchDiscipline);
+        elMatchHeaderRight.append(elMatchDiscipline);
 
         let elMatchReportage = document.createElement('div');
 
         elMatchReportage.classList.add('reportage');
         elMatchReportage.append(item.reportage.title);
-        elMatchHeaderRight.appendChild(elMatchReportage);
+        elMatchHeaderRight.append(elMatchReportage);
 
         let elMatchHeaderDate = document.createElement('div');
 
@@ -95,12 +95,12 @@ function create(matches) {
         }
 
         elMatchHeaderDate.append(hours + ':' + minutes);
-        elMatchHeader.appendChild(elMatchHeaderDate);
+        elMatchHeader.append(elMatchHeaderDate);
 
         let elMatchTeams = document.createElement('div');
 
         elMatchTeams.classList.add('b-match__info');
-        elMatch.appendChild(elMatchTeams);
+        elMatch.append(elMatchTeams);
 
         createTeam(item.team1, item.score1, elMatchTeams);
         createTeam(item.team2, item.score2, elMatchTeams)
@@ -110,12 +110,12 @@ function create(matches) {
         let elMatchTeam = document.createElement('div');
 
         elMatchTeam.classList.add('b-match-team');
-        el.appendChild(elMatchTeam);
+        el.append(elMatchTeam);
 
         let elMatchTeamLeft = document.createElement('div');
 
         elMatchTeamLeft.classList.add('d-flex');
-        elMatchTeam.appendChild(elMatchTeamLeft);
+        elMatchTeam.append(elMatchTeamLeft);
 
         let elMatchTeamLogo = document.createElement('img');
 
@@ -128,18 +128,18 @@ function create(matches) {
             elMatchTeamLogo.setAttribute('src', team.image);
         }
 
-        elMatchTeamLeft.appendChild(elMatchTeamLogo);
+        elMatchTeamLeft.append(elMatchTeamLogo);
 
         let elMatchTeamName = document.createElement('div');
 
         elMatchTeamName.classList.add('b-match-team__name');
         elMatchTeamName.append(team.title);
-        elMatchTeamLeft.appendChild(elMatchTeamName);
+        elMatchTeamLeft.append(elMatchTeamName);
 
         let elMatchTeamScore = document.createElement('div');
 
         elMatchTeamScore.append(score);
-        elMatchTeam.appendChild(elMatchTeamScore);
+        elMatchTeam.append(elMatchTeamScore);
     }
 
     function createCollapse(type, title) {
@@ -147,34 +147,34 @@ function create(matches) {
 
         elCollapse.setAttribute('id', type);
         elCollapse.setAttribute('collapse', type);
-        elMatchesList.appendChild(elCollapse);
+        elMatchesList.append(elCollapse);
 
         let elCollapseTitle = document.createElement('div');
 
         elCollapseTitle.classList.add('b-collapse__title');
-        elCollapse.appendChild(elCollapseTitle);
+        elCollapse.append(elCollapseTitle);
 
         let elCollapseTitleText = document.createElement('div');
 
         elCollapseTitleText.classList.add('b-collapse__title-text');
         elCollapseTitleText.append(title);
-        elCollapseTitle.appendChild(elCollapseTitleText);
+        elCollapseTitle.append(elCollapseTitleText);
 
         let elCollapseTitleArrow = document.createElement('div');
 
         elCollapseTitleArrow.classList.add('b-collapse__title-arrow');
-        elCollapseTitle.appendChild(elCollapseTitleArrow);
+        elCollapseTitle.append(elCollapseTitleArrow);
 
         let elCollapseContent = document.createElement('div');
 
         elCollapseContent.classList.add('b-collapse__content');
-        elCollapse.appendChild(elCollapseContent);
+        elCollapse.append(elCollapseContent);
     }
 
     createCollapse('active', 'Текущие');
     createCollapse('future', 'Будущие');
 
-    matches.forEach(function (item) {
+    matches.forEach(item => {
 
         let elMatch = document.createElement('a');
 
@@ -182,17 +182,17 @@ function create(matches) {
 
         if (item.status === 'active' || item.status === 'future') {
             if (item.status === 'active') {
-                document.getElementById('active').querySelector('.b-collapse__content').appendChild(elMatch);
+                document.getElementById('active').querySelector('.b-collapse__content').append(elMatch);
             } else {
-                document.getElementById('future').querySelector('.b-collapse__content').appendChild(elMatch);
+                document.getElementById('future').querySelector('.b-collapse__content').append(elMatch);
             }
         }
     });
 
     let elCollapseTitle = document.querySelectorAll('.b-collapse__title');
 
-    elCollapseTitle.forEach(function (item) {
-        item.addEventListener('click', function() {
+    elCollapseTitle.forEach( item => {
+        item.addEventListener('click', () => {
             let itemContent = item.nextElementSibling;
 
             itemContent.classList.toggle('b-collapse__content_hide');
