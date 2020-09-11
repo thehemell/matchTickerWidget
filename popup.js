@@ -79,18 +79,18 @@ function create(matches) {
 
         let elMatchHeaderDate = document.createElement('div');
 
-        let d = new Date(0);
+        let d = new Date();
 
         d.setUTCSeconds(item.timestamp);
 
         let hours = d.getHours(),
             minutes = d.getMinutes();
 
-        if(hours < 10) {
+        if (hours < 10) {
             hours = '0' + hours;
         }
 
-        if(minutes === 0) {
+        if (minutes === 0) {
             minutes = '00';
         }
 
